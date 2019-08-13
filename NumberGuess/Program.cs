@@ -8,11 +8,11 @@ namespace NumberGuess
 {
     class Program
     {
-        const int minimumValue = 1;
-        const int maximumValue = 100;
-        const int numberOfGuesses = 10;
-        const string numberPrompt = "Please enter a number between {0} and {1}, inclusive.";
-        const string guessPrompt = "What's your guess?";
+        const int MinimumValue = 1;
+        const int MaximumValue = 100;
+        const int NumberOfGuesses = 10;
+        const string NumberPrompt = "Please enter a number between {0} and {1}, inclusive.";
+        const string GuessPrompt = "What's your guess?";
 
         static void Main(string[] args)
         {
@@ -93,7 +93,7 @@ namespace NumberGuess
                 int tempNumber;
                 if (int.TryParse(Console.ReadLine(), out tempNumber))
                 {
-                    if (tempNumber < minimumValue || tempNumber > maximumValue)
+                    if (tempNumber < MinimumValue || tempNumber > MaximumValue)
                     {
                         Console.WriteLine("That number is out of bounds.");
                     }
@@ -119,14 +119,14 @@ namespace NumberGuess
         /// <param name="player2Name">The second player.</param>
         static void PlayGame(string player1Name, string player2Name)
         {
-            int numberToGuess = GetNumber(player1Name, string.Format(numberPrompt, minimumValue, maximumValue));
+            int numberToGuess = GetNumber(player1Name, string.Format(NumberPrompt, MinimumValue, MaximumValue));
             Console.Clear();
             int incorrectGuesses = 0;
             bool gameWin = false;
-            while (incorrectGuesses < numberOfGuesses && !gameWin)
+            while (incorrectGuesses < NumberOfGuesses && !gameWin)
             {
-                Console.WriteLine("You have {0} guesses remaining.", numberOfGuesses - incorrectGuesses);
-                int guess = GetNumber(player2Name, guessPrompt);
+                Console.WriteLine("You have {0} guesses remaining.", NumberOfGuesses - incorrectGuesses);
+                int guess = GetNumber(player2Name, GuessPrompt);
                 if (guess == numberToGuess)
                 {
                     Console.WriteLine("Well done, {0}, you guessed {1}'s number!", player2Name, player1Name);
