@@ -13,7 +13,6 @@ namespace NumberGuess
         const int numberOfGuesses = 10;
         const string numberPrompt = "Please enter a number between {0} and {1}, inclusive.";
         const string guessPrompt = "What's your guess?";
-        const string replayPrompt = "Would you like to play again? (y/n)";
 
         static void Main(string[] args)
         {
@@ -24,24 +23,30 @@ namespace NumberGuess
             do
             {
                 PlayGame(player1Name, player2Name);
-                Console.WriteLine(replayPrompt);
-                char replayInput = char.ToLower(Console.ReadKey().KeyChar);
-                if (replayInput == 'n')
+                char replayInput;
+                bool replayCharValid = false;
+                do
                 {
-                    playingGame = false;
-                }
-                else if (replayInput == 'y')
-                {
-                    string tempString = player1Name;
-                    player1Name = player2Name;
-                    player2Name = tempString;
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Press any key to restart the game with the same players.");
-                    Console.ReadKey();
-                }
+                    Console.Write("\nWould you like to switch places and play again? (y/n) ");
+                    replayInput = char.ToLower(Console.ReadKey().KeyChar);
+                    if (replayInput == 'n')
+                    {
+                        playingGame = false;
+                        replayCharValid = true;
+                    }
+                    else if (replayInput == 'y')
+                    {
+                        string tempString = player1Name;
+                        player1Name = player2Name;
+                        player2Name = tempString;
+                        Console.Clear();
+                        replayCharValid = true;
+                    }
+                    else
+                    {
+                        Console.Write("\nInvalid input. ");
+                    }
+                } while (!replayCharValid);
             }
             while (playingGame);
         }
